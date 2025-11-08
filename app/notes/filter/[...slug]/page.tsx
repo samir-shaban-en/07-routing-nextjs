@@ -1,4 +1,4 @@
-import FilterClient from './Filter.client';
+import FilterClient from './Notes.client';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
