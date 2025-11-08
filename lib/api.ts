@@ -57,4 +57,18 @@ const getSingleNote = async (noteId: string): Promise<Note> => {
   return res.data;
 };
 
-export { fetchNotes, createNote, deleteNote, getSingleNote };
+const getNotesByCategories = async (tag: string): Promise<Note[]> => {
+  const { data } = await axios.get<NotesResponse>(
+    `https://notehub-public.goit.study/api/notes?tag=${tag}`,
+    options
+  );
+
+  return data.notes;
+};
+export {
+  fetchNotes,
+  createNote,
+  deleteNote,
+  getSingleNote,
+  getNotesByCategories,
+};
