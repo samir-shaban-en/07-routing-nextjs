@@ -13,20 +13,26 @@ export default async function DocsPage({ params }: Props) {
   const { slug } = await params;
 
   const queryClient = new QueryClient();
-
+  const category =
+    slug[0] === 'all'
+      ? undefined
+      : (slug[0] as 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping');
   const currentPage = 1;
   const text = '';
-  const tag = slug[0] as 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 
   await queryClient.prefetchQuery({
-    queryKey: ['notes', currentPage, text, tag],
-    queryFn: () => fetchNotes(currentPage, text, tag),
+    queryKey: ['notes', currentPage, text, category],
+    queryFn: () => fetchNotes(currentPage, text, category),
   });
 
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <NoteDetails initialPage={currentPage} initialText={text} tag={tag} />
+        <NoteDetails
+          initialPage={currentPage}
+          initialText={text}
+          tag={category}
+        />
       </HydrationBoundary>
     </>
   );
