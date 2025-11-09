@@ -13,7 +13,13 @@ export default async function DocsPage({ params }: Props) {
   const { slug } = await params;
 
   const queryClient = new QueryClient();
-  const tag = slug[0] as 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+  const tag = slug[0] as
+    | 'Todo'
+    | 'Work'
+    | 'Personal'
+    | 'Meeting'
+    | 'Shopping'
+    | undefined;
   const currentPage = 1;
   const text = '';
 
